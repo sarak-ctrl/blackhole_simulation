@@ -1,0 +1,3 @@
+/Users/farhanakhansara/Black Hole/build/CMakeFiles/black_hole.dir
+/Users/farhanakhansara/Black Hole/build/CMakeFiles/edit_cache.dir
+/Users/farhanakhansara/Black Hole/build/CMakeFiles/rebuild_cache.dir
