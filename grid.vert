@@ -39,6 +39,5 @@ void main() {
     vDistToCenter = r;
     vWarpAmount   = abs(well) / (uMass * 2.5 + 0.001);
 
-    // Final screen position = ViewProjection * world position
     gl_Position = uVP * vec4(p, 1.0);
 }
