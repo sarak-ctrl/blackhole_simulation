@@ -39,13 +39,11 @@ void main() {
         }
 
         if(r > 100.0) {
-            // stars + faint nebula floor so the background is never pure black
             float h = fract(sin(dot(normalize(vel), vec3(127.1,311.7,74.7)))*43758.5);
             color += transmit * (vec3(0.01, 0.015, 0.03) + vec3(h * 0.4) * 0.35);
             break;
         }
 
-        // gravity
         float r2 = dot(pos,pos);
         float r3 = r2*r;
         vec3 acc = -1.5*M/r3 * pos;
@@ -53,7 +51,6 @@ void main() {
         vel += acc * h;
         pos += vel * h;
 
-        // disk
         float diskR = length(pos.xz);
         float rISCO = M * 3.0;
         float rOut  = rISCO * 2.8;
@@ -61,7 +58,6 @@ void main() {
         if(diskR > rISCO && diskR < rOut && abs(pos.y) < 0.6) {
             float dens = (1.0 - abs(pos.y)/0.6);
             dens *= smoothstep(rISCO, rISCO*1.2, diskR);
-            // Defined fade-out at disk outer edge (avoid reversed smoothstep args).
             dens *= (1.0 - smoothstep(rOut * 0.8, rOut, diskR));
 
             float temp = 8000.0 * uDiskBright * pow(rISCO/diskR, 0.75);
@@ -72,13 +68,11 @@ void main() {
             dcol = mix(vec3(1.0,0.2,0.0), vec3(1.0,0.8,0.3), t);
             dcol = mix(dcol, vec3(1.0,1.0,1.0), max(0.0, t-0.5)*2.0);
 
-            // doppler
             vec3 tang = normalize(cross(vec3(0,1,0), pos));
             float beta = 0.4 * sqrt(M/max(diskR,0.1));
             float dop = 1.0 + beta * dot(tang, -normalize(vel));
             dop = clamp(dop, 0.1, 5.0);
 
-            // shimmer
             dcol *= 1.0 + 0.15*sin(diskR*3.0 - uTime*4.0);
             dcol *= dens * dop * uDiskBright * 1.6;
 
