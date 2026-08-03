@@ -83,6 +83,5 @@ void main() {
         }
     }
 
-    // Kept this pass in HDR; final tone mapping happens in composite.frag.
     fragColor = vec4(color, 1.0);
 }
