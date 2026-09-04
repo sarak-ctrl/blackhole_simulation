@@ -400,7 +400,6 @@ int main() {
         glfwPollEvents();    
     }
 
-    // ------------------------- Cleanup ------------------------------
     glfwDestroyWindow(win);
     glfwTerminate();
     return 0;
